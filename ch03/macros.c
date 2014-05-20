@@ -1,3 +1,4 @@
+// macros lists some of the feature test macros in effect
 #include <stdio.h>
 
 int main()
