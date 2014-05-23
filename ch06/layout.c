@@ -12,14 +12,9 @@ extern char etext, edata, end;
 int uninitialized;
 int initialized = 123;
 
-int function()
+void function(int *stack1)
 {
-	return 1;
-}
-
-int main()
-{
-	int stack;
+	int stack2;
 	void *heap1 = malloc(10);
 	void *heap2 = malloc(10);
 	void *program_break = sbrk(0);
@@ -46,11 +41,18 @@ int main()
 #else
 	printf("get_end()      %#14lx\n", get_end());
 #endif
-	printf("heap2          %14p\n", heap2);
 	printf("heap1          %14p\n", heap1);
+	printf("heap2          %14p\n", heap2);
 	printf("program_break  %14p\n", program_break);
-	printf("&stack         %14p\n", &stack);
+	printf("&stack2        %14p\n", &stack2);
+	printf("stack1         %14p\n", stack1);
 
 	free(heap1);
 	free(heap2);
+}
+
+int main()
+{
+	int stack1;
+	function(&stack1);
 }
